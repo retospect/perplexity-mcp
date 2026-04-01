@@ -136,7 +136,9 @@ def web_search(query: str, focus: str = "", recency: str = "") -> str:
         recency: Time filter — "day", "week", "month", "year", or "" (all time).
     """
     try:
-        data = _sonar_call(query, model="sonar", focus=focus, recency=recency, timeout=30)
+        data = _sonar_call(
+            query, model="sonar", focus=focus, recency=recency, timeout=30
+        )
         return _format_response(data)
     except Exception as exc:
         return f"Error: {exc}"
@@ -156,7 +158,9 @@ def web_ask(query: str, focus: str = "", recency: str = "") -> str:
         recency: Time filter — "day", "week", "month", "year", or "" (all time).
     """
     try:
-        data = _sonar_call(query, model="sonar-pro", focus=focus, recency=recency, timeout=60)
+        data = _sonar_call(
+            query, model="sonar-pro", focus=focus, recency=recency, timeout=60
+        )
         return _format_response(data)
     except Exception as exc:
         return f"Error: {exc}"

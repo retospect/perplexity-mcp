@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -13,7 +12,6 @@ from perplexity_sonar_mcp.server import (
     web_ask,
     web_search,
 )
-
 
 # ── _format_response ─────────────────────────────────────────────────
 
@@ -85,7 +83,9 @@ class TestSonarCall:
         with patch.dict("os.environ", {"PERPLEXITY_API_KEY": "key"}):
             _sonar_call("enzyme kinetics", model="sonar-pro", focus="academic")
 
-        payload = mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        payload = (
+            mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        )
         assert payload["search_mode"] == "academic"
 
     @patch("perplexity_sonar_mcp.server.httpx.post")
@@ -98,7 +98,9 @@ class TestSonarCall:
         with patch.dict("os.environ", {"PERPLEXITY_API_KEY": "key"}):
             _sonar_call("AAPL 10-K", model="sonar", focus="finance")
 
-        payload = mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        payload = (
+            mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        )
         assert payload["search_mode"] == "sec"
 
     @patch("perplexity_sonar_mcp.server.httpx.post")
@@ -111,7 +113,9 @@ class TestSonarCall:
         with patch.dict("os.environ", {"PERPLEXITY_API_KEY": "key"}):
             _sonar_call("latest AI news", model="sonar", recency="week")
 
-        payload = mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        payload = (
+            mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        )
         assert payload["search_recency_filter"] == "week"
 
     @patch("perplexity_sonar_mcp.server.httpx.post")
@@ -124,7 +128,9 @@ class TestSonarCall:
         with patch.dict("os.environ", {"PERPLEXITY_API_KEY": "key"}):
             _sonar_call("test", model="sonar")
 
-        payload = mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        payload = (
+            mock_post.call_args.kwargs.get("json") or mock_post.call_args[1]["json"]
+        )
         assert "search_mode" not in payload
         assert "search_recency_filter" not in payload
 
@@ -144,7 +150,10 @@ class TestWebSearch:
         assert "[1]" in result
         mock_call.assert_called_once()
         # Verify model is sonar
-        assert mock_call.call_args.kwargs.get("model") == "sonar" or mock_call.call_args[1].get("model") == "sonar"
+        assert (
+            mock_call.call_args.kwargs.get("model") == "sonar"
+            or mock_call.call_args[1].get("model") == "sonar"
+        )
 
     @patch("perplexity_sonar_mcp.server._sonar_call")
     def test_error_handling(self, mock_call):
@@ -162,7 +171,10 @@ class TestWebAsk:
             "citations": [],
         }
         web_ask("compare Pd vs Pt catalysts")
-        assert mock_call.call_args.kwargs.get("model") == "sonar-pro" or mock_call.call_args[1].get("model") == "sonar-pro"
+        assert (
+            mock_call.call_args.kwargs.get("model") == "sonar-pro"
+            or mock_call.call_args[1].get("model") == "sonar-pro"
+        )
 
     @patch("perplexity_sonar_mcp.server._sonar_call")
     def test_passes_focus(self, mock_call):
@@ -171,4 +183,7 @@ class TestWebAsk:
             "citations": [],
         }
         web_ask("enzyme kinetics", focus="academic")
-        assert mock_call.call_args.kwargs.get("focus") == "academic" or mock_call.call_args[1].get("focus") == "academic"
+        assert (
+            mock_call.call_args.kwargs.get("focus") == "academic"
+            or mock_call.call_args[1].get("focus") == "academic"
+        )
