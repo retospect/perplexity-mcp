@@ -1,4 +1,4 @@
-# perplexity-mcp
+# perplexity-sonar-mcp
 
 Tiny Python MCP server for Perplexity web search — 3 tools with escalating depth.
 
@@ -17,7 +17,7 @@ Both `web_search` and `web_ask` accept optional `focus` (`"academic"`, `"finance
 ```bash
 pip install -e .
 export PERPLEXITY_API_KEY=pplx-...
-perplexity-mcp  # starts stdio MCP server
+perplexity-sonar-mcp  # starts stdio MCP server
 ```
 
 ## MCP client config
@@ -25,7 +25,7 @@ perplexity-mcp  # starts stdio MCP server
 ```json
 {
   "name": "perplexity",
-  "cmd": ["perplexity-mcp"],
+  "cmd": ["perplexity-sonar-mcp"],
   "env": {"PERPLEXITY_API_KEY": "pplx-..."}
 }
 ```

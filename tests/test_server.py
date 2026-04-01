@@ -1,4 +1,4 @@
-"""Tests for perplexity-mcp server — unit tests with mocked HTTP."""
+"""Tests for perplexity-sonar-mcp server — unit tests with mocked HTTP."""
 
 from __future__ import annotations
 

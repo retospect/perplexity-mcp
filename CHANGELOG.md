@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to **perplexity-mcp** will be documented in this file.
+All notable changes to **perplexity-sonar-mcp** will be documented in this file.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/).
 
