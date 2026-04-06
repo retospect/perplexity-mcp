@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "perplexity-sonar-mcp"
-version = "0.2.0"
+version = "0.2.1"
 description = "Tiny MCP server for Perplexity Sonar web search"
 readme = "README.md"
 license = "GPL-3.0-or-later"
